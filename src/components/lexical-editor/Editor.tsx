@@ -6,11 +6,16 @@ import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import {RichTextPlugin} from "@lexical/react/LexicalRichTextPlugin";
+import {HeadingNode} from '@lexical/rich-text'
+import MyHeadingPlugin from "./plugins/MyHeadingPlugin";
 
 const theme = {
+	heading: {
+		h1: 'lexical-editor-h1'
+	},
 	text: {
 		bold: 'lexical-editor-bold',
-		italic: 'lexical-editor-italic'
+		italic: 'lexical-editor-italic',
 	}
 }
 
@@ -23,10 +28,14 @@ export default function Editor() {
 		namespace: 'MyEditor',
 		theme,
 		onError,
+		nodes: [
+			HeadingNode
+		]
 	};
 
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
+			<MyHeadingPlugin />
 			<RichTextPlugin
 				contentEditable={<ContentEditable className='contentEditable'/>}
 				placeholder={<div className='placeholder'>Enter some text...</div>}
