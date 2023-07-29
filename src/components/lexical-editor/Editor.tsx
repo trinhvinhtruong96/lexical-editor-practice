@@ -7,24 +7,12 @@ import {PlainTextPlugin} from '@lexical/react/LexicalPlainTextPlugin';
 import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
-import {useLexicalComposerContext} from '@lexical/react/LexicalComposerContext';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 
 const theme = {}
 
 function onError(error: Error) {
 	console.error(error);
-}
-
-function MyOnChangePlugin(props: { onChange: (editorState: EditorState) => void }) {
-	const [editor] = useLexicalComposerContext();
-	const {onChange} = props;
-	useEffect(() => {
-		return editor.registerUpdateListener(({editorState}) => {
-			onChange(editorState)
-		});
-	}, [onChange, editor])
-	return <></>
 }
 
 export default function Editor() {
@@ -42,7 +30,7 @@ export default function Editor() {
 				ErrorBoundary={LexicalErrorBoundary}
 			/>
 			<HistoryPlugin/>
-			<MyOnChangePlugin onChange={(editorState) => {
+			<OnChangePlugin onChange={(editorState) => {
 				console.log('state', editorState)
 			}}/>
 		</LexicalComposer>
