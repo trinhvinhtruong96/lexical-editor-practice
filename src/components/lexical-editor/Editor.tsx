@@ -1,6 +1,6 @@
 import './styles.css'
 import {useEffect} from 'react';
-import {$getRoot, $getSelection} from 'lexical';
+import {$getRoot, $getSelection, EditorState} from 'lexical';
 
 import {LexicalComposer} from '@lexical/react/LexicalComposer';
 import {PlainTextPlugin} from '@lexical/react/LexicalPlainTextPlugin';
@@ -16,6 +16,17 @@ function onError(error: Error) {
 	console.error(error);
 }
 
+function MyOnChangePlugin(props: { onChange: (editorState: EditorState) => void }) {
+	const [editor] = useLexicalComposerContext();
+	const {onChange} = props;
+	useEffect(() => {
+		return editor.registerUpdateListener(({editorState}) => {
+			onChange(editorState)
+		});
+	}, [onChange, editor])
+	return <></>
+}
+
 export default function Editor() {
 	const initialConfig = {
 		namespace: 'MyEditor',
@@ -26,10 +37,14 @@ export default function Editor() {
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
 			<PlainTextPlugin
-				contentEditable={<ContentEditable class />}
-				placeholder={<div>Enter some textsss...</div>}
+				contentEditable={<ContentEditable className='contentEditable'/>}
+				placeholder={<div className='placeholder'>Enter some text...</div>}
 				ErrorBoundary={LexicalErrorBoundary}
 			/>
+			<HistoryPlugin/>
+			<MyOnChangePlugin onChange={(editorState) => {
+				console.log('state', editorState)
+			}}/>
 		</LexicalComposer>
 	);
 }

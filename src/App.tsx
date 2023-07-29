@@ -5,7 +5,9 @@ import Editor from "./components/lexical-editor/Editor";
 function App() {
 	return (
 		<div className="App">
-			<Editor />
+			<div className="editorWrapper">
+				<Editor />
+			</div>
 		</div>
 	);
 }
