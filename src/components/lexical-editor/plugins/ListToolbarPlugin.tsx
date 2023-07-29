@@ -1,6 +1,4 @@
 import {useLexicalComposerContext} from "@lexical/react/LexicalComposerContext";
-import {$getSelection, $isRangeSelection} from "lexical";
-import {$setBlocksType} from "@lexical/selection";
 import {INSERT_ORDERED_LIST_COMMAND, INSERT_UNORDERED_LIST_COMMAND} from "@lexical/list";
 
 type ListTag = 'ol' | 'ul'
