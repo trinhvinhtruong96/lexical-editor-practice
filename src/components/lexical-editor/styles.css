@@ -10,3 +10,11 @@
     top: 16px;
     padding-left: 8px;
 }
+
+.lexical-editor-bold {
+    color: red;
+}
+
+.lexical-editor-italic {
+    color: green;
+}

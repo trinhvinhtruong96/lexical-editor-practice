@@ -1,15 +1,18 @@
 import './styles.css'
-import {useEffect} from 'react';
-import {$getRoot, $getSelection, EditorState} from 'lexical';
 
 import {LexicalComposer} from '@lexical/react/LexicalComposer';
-import {PlainTextPlugin} from '@lexical/react/LexicalPlainTextPlugin';
 import {ContentEditable} from '@lexical/react/LexicalContentEditable';
 import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
+import {RichTextPlugin} from "@lexical/react/LexicalRichTextPlugin";
 
-const theme = {}
+const theme = {
+	text: {
+		bold: 'lexical-editor-bold',
+		italic: 'lexical-editor-italic'
+	}
+}
 
 function onError(error: Error) {
 	console.error(error);
@@ -24,7 +27,7 @@ export default function Editor() {
 
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
-			<PlainTextPlugin
+			<RichTextPlugin
 				contentEditable={<ContentEditable className='contentEditable'/>}
 				placeholder={<div className='placeholder'>Enter some text...</div>}
 				ErrorBoundary={LexicalErrorBoundary}
