@@ -11,14 +11,27 @@
     padding-left: 8px;
 }
 
+.toolbarWrapper {
+    display: flex;
+}
+
 .lexical-editor-bold {
     color: red;
 }
-
 .lexical-editor-italic {
     color: green;
 }
 
 .lexical-editor-h1 {
-    background: blanchedalmond;
+    font-size: 48px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.lexical-editor-h2 {
+    font-size: 40px;
+    font-weight: bold;
+    color: green;
+}
+.lexical-editor-h3 {
+    font-size: 32px;
 }

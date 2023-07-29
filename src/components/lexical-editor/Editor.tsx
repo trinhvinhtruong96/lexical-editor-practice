@@ -6,12 +6,16 @@ import {HistoryPlugin} from '@lexical/react/LexicalHistoryPlugin';
 import {OnChangePlugin} from '@lexical/react/LexicalOnChangePlugin';
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import {RichTextPlugin} from "@lexical/react/LexicalRichTextPlugin";
+import {ListPlugin} from "@lexical/react/LexicalListPlugin";
 import {HeadingNode} from '@lexical/rich-text'
-import MyHeadingPlugin from "./plugins/MyHeadingPlugin";
+import {ListNode, ListItemNode} from '@lexical/list'
+import ToolbarPlugin from "./plugins/ToolbarPlugin";
 
 const theme = {
 	heading: {
-		h1: 'lexical-editor-h1'
+		h1: 'lexical-editor-h1',
+		h2: 'lexical-editor-h2',
+		h3: 'lexical-editor-h3',
 	},
 	text: {
 		bold: 'lexical-editor-bold',
@@ -29,13 +33,15 @@ export default function Editor() {
 		theme,
 		onError,
 		nodes: [
-			HeadingNode
+			HeadingNode,
+			ListNode,
+			ListItemNode,
 		]
 	};
 
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
-			<MyHeadingPlugin />
+			<ToolbarPlugin/>
 			<RichTextPlugin
 				contentEditable={<ContentEditable className='contentEditable'/>}
 				placeholder={<div className='placeholder'>Enter some text...</div>}
@@ -45,6 +51,7 @@ export default function Editor() {
 			<OnChangePlugin onChange={(editorState) => {
 				console.log('state', editorState)
 			}}/>
+			<ListPlugin />
 		</LexicalComposer>
 	);
 }
