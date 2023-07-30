@@ -35,3 +35,10 @@
 .lexical-editor-h3 {
     font-size: 32px;
 }
+
+.lexical-editor-banner {
+    background: rgba(138, 43, 226, 0.3);
+    margin: 8px 0;
+    padding: 8px;
+    border-left: 4px solid rgba(138, 43, 226);
+}

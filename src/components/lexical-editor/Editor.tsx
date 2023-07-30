@@ -8,8 +8,9 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import {RichTextPlugin} from "@lexical/react/LexicalRichTextPlugin";
 import {ListPlugin} from "@lexical/react/LexicalListPlugin";
 import {HeadingNode} from '@lexical/rich-text'
-import {ListNode, ListItemNode} from '@lexical/list'
-import ToolbarPlugin from "./plugins/ToolbarPlugin";
+import {ListItemNode, ListNode} from '@lexical/list'
+import ToolbarPlugin from "./plugins/toolbar/ToolbarPlugin";
+import {BannerNode, BannerPlugin} from "./plugins/banner/BannerPlugin";
 
 const theme = {
 	heading: {
@@ -20,7 +21,8 @@ const theme = {
 	text: {
 		bold: 'lexical-editor-bold',
 		italic: 'lexical-editor-italic',
-	}
+	},
+	banner: 'lexical-editor-banner',
 }
 
 function onError(error: Error) {
@@ -36,12 +38,14 @@ export default function Editor() {
 			HeadingNode,
 			ListNode,
 			ListItemNode,
+			BannerNode,
 		]
 	};
 
 	return (
 		<LexicalComposer initialConfig={initialConfig}>
 			<ToolbarPlugin/>
+			<BannerPlugin/>
 			<RichTextPlugin
 				contentEditable={<ContentEditable className='contentEditable'/>}
 				placeholder={<div className='placeholder'>Enter some text...</div>}
@@ -51,7 +55,7 @@ export default function Editor() {
 			<OnChangePlugin onChange={(editorState) => {
 				console.log('state', editorState)
 			}}/>
-			<ListPlugin />
+			<ListPlugin/>
 		</LexicalComposer>
 	);
 }
